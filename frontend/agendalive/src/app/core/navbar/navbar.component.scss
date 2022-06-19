@@ -1,0 +1,13 @@
+.row-flex {
+  display: flex;
+  justify-content: space-between;
+
+  & .title {
+    display: flex;
+    align-items: center;
+
+    & > span {
+      margin-right: .5rem;
+    }
+  }
+}
