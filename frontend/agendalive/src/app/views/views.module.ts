@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,6 +15,7 @@ import { ListLiveComponent } from './list-live/list-live.component';
   ],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
 
     MatTabsModule
   ],
