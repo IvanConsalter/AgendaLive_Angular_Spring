@@ -5,7 +5,12 @@
         <div class="card" *ngFor="let live of liveNext">
           <div class="card-header">
             <div class="live-link">
-              <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg" alt="rover" />
+              <iframe
+                [src]="live.urlSafe"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
             </div>
           </div>
           <div class="card-body">
@@ -27,7 +32,12 @@
         <div class="card" *ngFor="let live of livePrevious">
           <div class="card-header">
             <div class="live-link">
-              <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg" alt="rover" />
+              <iframe
+                [src]="live.urlSafe"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
             </div>
           </div>
           <div class="card-body">
