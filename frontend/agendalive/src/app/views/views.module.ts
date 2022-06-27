@@ -5,21 +5,27 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { ListLiveComponent } from './list-live/list-live.component';
+import { LiveFormDialogComponent } from './live-form-dialog/live-form-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
   declarations: [
     ListLiveComponent,
-    HomeComponent
+    HomeComponent,
+    LiveFormDialogComponent,
   ],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
     HttpClientModule,
 
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   exports: [
     ListLiveComponent,
