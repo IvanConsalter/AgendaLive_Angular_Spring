@@ -14,7 +14,7 @@
             </div>
           </div>
           <div class="card-body">
-            <span class="live-date">{{ live.liveDate }}</span>
+            <span class="live-date">{{ live.liveDate | date:'dd/MM/yy HH:mm' }}</span>
             <p class="live-title">
               {{ live.liveName }}
             </p>
@@ -41,7 +41,7 @@
             </div>
           </div>
           <div class="card-body">
-            <span class="live-date">{{ live.liveDate }}</span>
+            <span class="live-date">{{ live.liveDate | date:'dd/MM/yy HH:mm' }}</span>
             <p class="live-title">
               {{ live.liveName }}
             </p>
