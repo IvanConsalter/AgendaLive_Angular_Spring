@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -39,6 +39,7 @@ import { HomeComponent } from './home/home.component';
   exports: [
     ListLiveComponent,
     HomeComponent
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class ViewsModule { }

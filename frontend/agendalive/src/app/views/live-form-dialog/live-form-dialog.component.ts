@@ -1,6 +1,10 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { MatDialogRef } from '@angular/material/dialog';
+
+import { LiveService } from './../list-live/live.service';
 
 @Component({
   selector: 'app-live-form-dialog',
@@ -13,7 +17,9 @@ export class LiveFormDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<LiveFormDialogComponent>,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public datePipe: DatePipe,
+    private liveService: LiveService
   ) { }
 
   ngOnInit(): void {
@@ -32,11 +38,16 @@ export class LiveFormDialogComponent implements OnInit {
   }
 
   addLive(): void {
-
+    const dateFormated = this.datePipe.transform(this.liveForm.value.liveDate, 'yyyy-MM-dd');
+    this.liveForm.value.liveDate = `${dateFormated}T${this.liveForm.value.liveTime}`;
+    this.liveService.addLive(this.liveForm.value).subscribe();
+    this.dialogRef.close();
+    this.liveForm.reset();
   }
 
   cancelDialog(): void {
     this.dialogRef.close();
+    this.liveForm.reset();
   }
 
 }
