@@ -1,0 +1,15 @@
+form {
+
+  & .form-field {
+    width: 100%;
+  }
+
+  & .date-time {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & .btn-actions {
+    justify-content: end;
+  }
+}

@@ -1,16 +1,19 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './home/home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { ListLiveComponent } from './list-live/list-live.component';
 import { LiveFormDialogComponent } from './live-form-dialog/live-form-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +26,15 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserAnimationsModule,
     HttpClientModule,
 
+    FormsModule,
+    ReactiveFormsModule,
+
     MatTabsModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     ListLiveComponent,
