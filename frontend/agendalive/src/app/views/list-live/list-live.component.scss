@@ -40,7 +40,12 @@
       align-items: flex-start;
       padding: 1rem;
 
-
+      & .card-footer {
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
       & .live-date {
         background: rgba(63, 81, 181, .5);

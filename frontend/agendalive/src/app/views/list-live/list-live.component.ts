@@ -1,5 +1,5 @@
 import { LiveService } from './live.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Live } from 'src/app/shared/model/live.model';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -9,6 +9,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./list-live.component.scss']
 })
 export class ListLiveComponent implements OnInit {
+
+  @ViewChild('actionsContent') actionsContent: ElementRef;
 
   livePrevious: Array<Live> = [];
   liveNext: Array<Live> = [];
@@ -43,6 +45,12 @@ export class ListLiveComponent implements OnInit {
           live.urlSafe = this.domSanitizer.bypassSecurityTrustResourceUrl(live.liveLink);
         })
       });
+  }
+
+  showActions(index: number): void {
+    console.log(index);
+    console.log(this.actionsContent);
+    this.actionsContent.nativeElement.classList = 'show-actions';
   }
 
 }
