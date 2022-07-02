@@ -1,5 +1,7 @@
+import { LiveFormDialogComponent } from 'src/app/views/live-form-dialog/live-form-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { LiveService } from './live.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Live } from 'src/app/shared/model/live.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
@@ -18,7 +20,8 @@ export class ListLiveComponent implements OnInit {
 
   constructor(
     private liveService: LiveService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +52,15 @@ export class ListLiveComponent implements OnInit {
           live.urlSafe = this.domSanitizer.bypassSecurityTrustResourceUrl(live.liveLink);
         })
       });
+  }
+
+  updateLive(liveId: number): void {
+    const dialogRef = this.dialog.open(LiveFormDialogComponent, {
+      data: {
+        liveId,
+        title: 'Editar Live'
+      }
+    });
   }
 
   deleteLive(liveId: number): void {

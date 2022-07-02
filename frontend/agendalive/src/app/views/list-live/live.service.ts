@@ -35,6 +35,10 @@ export class LiveService {
     return this.http.post<any>(this.liveUrl, live, this.httpOptions);
   }
 
+  public getLiveById(liveId: number): Observable<Live> {
+    return this.http.get<Live>(`${this.liveUrl}/${liveId}`);
+  }
+
   public deleteLive(liveId: number): Observable<Live> {
     return this.http.delete<Live>(`${this.liveUrl}/${liveId}`);
   }

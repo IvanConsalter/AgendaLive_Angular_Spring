@@ -20,11 +20,8 @@ export class NavbarComponent implements OnInit {
 
   addLive(): void {
     const dialogRef = this.dialog.open(LiveFormDialogComponent, {
-      width: '500px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      width: '500px',
+      data: {title: 'Adicionar Live'}
     });
   }
 }
