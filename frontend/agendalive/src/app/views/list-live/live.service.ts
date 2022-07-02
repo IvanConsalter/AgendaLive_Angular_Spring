@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Live } from 'src/app/shared/model/live.model';
 import { ResponsePageable } from 'src/app/shared/model/response-pageable.model';
@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class LiveService {
+
+  public behaviorSubjectReload: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
   liveUrl = `${environment.apiUrl}/lives`;
   httpOptions = {

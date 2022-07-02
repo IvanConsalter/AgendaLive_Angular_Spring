@@ -40,9 +40,11 @@ export class LiveFormDialogComponent implements OnInit {
   addLive(): void {
     const dateFormated = this.datePipe.transform(this.liveForm.value.liveDate, 'yyyy-MM-dd');
     this.liveForm.value.liveDate = `${dateFormated}T${this.liveForm.value.liveTime}`;
-    this.liveService.addLive(this.liveForm.value).subscribe();
-    this.dialogRef.close();
-    this.liveForm.reset();
+    this.liveService.addLive(this.liveForm.value).subscribe( () => {
+      this.dialogRef.close();
+      this.liveForm.reset();
+      this.liveService.behaviorSubjectReload.next(true);
+    });
   }
 
   cancelDialog(): void {

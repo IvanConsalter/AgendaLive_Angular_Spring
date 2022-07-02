@@ -2,6 +2,7 @@ import { LiveService } from './live.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Live } from 'src/app/shared/model/live.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-live',
@@ -10,7 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class ListLiveComponent implements OnInit {
 
-  @ViewChild('actionsContent') actionsContent: ElementRef;
+  subscriptionReload: Subscription = null;
 
   livePrevious: Array<Live> = [];
   liveNext: Array<Live> = [];
@@ -21,6 +22,9 @@ export class ListLiveComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.subscriptionReload = this.liveService.behaviorSubjectReload.subscribe(() => {
+      this.consultarLives();
+    });
     this.consultarLives();
   }
 
