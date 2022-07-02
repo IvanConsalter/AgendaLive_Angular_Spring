@@ -31,7 +31,7 @@
                     <mat-icon>edit</mat-icon>
                     <span>Editar</span>
                   </button>
-                  <button mat-menu-item>
+                  <button mat-menu-item (click)="deleteLive(live.id)">
                     <mat-icon>delete</mat-icon>
                     <span>Excluir</span>
                   </button>
@@ -75,7 +75,7 @@
                     <mat-icon>edit</mat-icon>
                     <span>Editar</span>
                   </button>
-                  <button mat-menu-item>
+                  <button mat-menu-item (click)="deleteLive(live.id)">
                     <mat-icon>delete</mat-icon>
                     <span>Excluir</span>
                   </button>

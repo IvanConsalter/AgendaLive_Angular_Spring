@@ -32,4 +32,8 @@ export class LiveService {
   public addLive(live: any): Observable<Live> {
     return this.http.post<any>(this.liveUrl, live, this.httpOptions);
   }
+
+  public deleteLive(liveId: number): Observable<Live> {
+    return this.http.delete<Live>(`${this.liveUrl}/${liveId}`);
+  }
 }

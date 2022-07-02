@@ -47,10 +47,10 @@ export class ListLiveComponent implements OnInit {
       });
   }
 
-  showActions(index: number): void {
-    console.log(index);
-    console.log(this.actionsContent);
-    this.actionsContent.nativeElement.classList = 'show-actions';
+  deleteLive(liveId: number): void {
+    this.liveService.deleteLive(liveId).subscribe(() => {
+      this.consultarLives();
+    });
   }
 
 }
