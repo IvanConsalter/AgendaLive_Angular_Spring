@@ -1,3 +1,4 @@
+import { ConfirmDialogComponent } from './../../core/confirm-dialog/confirm-dialog.component';
 import { LiveFormDialogComponent } from 'src/app/views/live-form-dialog/live-form-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LiveService } from './live.service';
@@ -68,9 +69,11 @@ export class ListLiveComponent implements OnInit {
   }
 
   deleteLive(liveId: number): void {
-    window.scroll({top: 0, left: 0, behavior: 'smooth'});
-    this.liveService.deleteLive(liveId).subscribe(() => {
-      this.consultarLives();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        liveId: liveId,
+        title: 'Excluir Live',
+      }
     });
   }
 
