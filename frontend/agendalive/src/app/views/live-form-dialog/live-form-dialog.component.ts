@@ -24,14 +24,15 @@ export class LiveFormDialogComponent implements OnInit {
     private liveService: LiveService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    this.liveId = data.liveId;
     this.title = data?.title;
   }
 
   ngOnInit(): void {
     this.configurarLiveForm();
 
-    if(this.data.liveId !== null) {
-      this.getLiveById(this.data.liveId);
+    if(this.liveId !== null) {
+      this.getLiveById(this.liveId);
     }
   }
 
@@ -42,12 +43,13 @@ export class LiveFormDialogComponent implements OnInit {
       channelName: ['', [Validators.required]],
       liveDate: ['', [Validators.required]],
       liveTime: ['', [Validators.required]],
-      liveLink: ['', [Validators.required]]
+      liveLink: ['', [Validators.required]],
+      registrationDate: ['']
     });
   }
 
   saveLive(): void {
-    if(!this.liveId) {
+    if(this.liveId === null) {
       this.addLive();
     }
     else {
@@ -56,16 +58,18 @@ export class LiveFormDialogComponent implements OnInit {
   }
 
   addLive(): void {
-    const dateFormated = this.datePipe.transform(this.liveForm.value.liveDate, 'yyyy-MM-dd');
-    this.liveForm.value.liveDate = `${dateFormated}T${this.liveForm.value.liveTime}`;
+    this.liveForm.value.liveDate = this.formatDateToSave();
     this.liveService.addLive(this.liveForm.value).subscribe( () => {
-      this.dialogRef.close();
-      this.liveForm.reset();
-      this.liveService.behaviorSubjectReload.next(true);
+      this.baseConfigWhenSaveLive();
     });
   }
 
   updateLive(): void {
+    this.liveForm.value.liveDate = this.formatDateToSave();
+    this.liveForm.value.registrationDate = new Date();
+    this.liveService.updateLive(this.liveForm.value).subscribe( () => {
+      this.baseConfigWhenSaveLive();
+    });
 
   }
 
@@ -88,6 +92,17 @@ export class LiveFormDialogComponent implements OnInit {
   cancelDialog(): void {
     this.dialogRef.close();
     this.liveForm.reset();
+  }
+
+  baseConfigWhenSaveLive(): void {
+    this.dialogRef.close();
+    this.liveForm.reset();
+    this.liveService.behaviorSubjectReload.next(true);
+  }
+
+  formatDateToSave(): string {
+    const dateFormated = this.datePipe.transform(this.liveForm.value.liveDate, 'yyyy-MM-dd');
+    return `${dateFormated}T${this.liveForm.value.liveTime}`;
   }
 
 }

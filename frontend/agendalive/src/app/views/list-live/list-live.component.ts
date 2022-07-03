@@ -26,6 +26,8 @@ export class ListLiveComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscriptionReload = this.liveService.behaviorSubjectReload.subscribe(() => {
+      this.livePrevious = [];
+      this.liveNext = [];
       this.consultarLives();
     });
     this.consultarLives();

@@ -31,12 +31,16 @@ export class LiveService {
     return this.http.get<ResponsePageable>(this.liveUrl, { params });
   }
 
-  public addLive(live: any): Observable<Live> {
-    return this.http.post<any>(this.liveUrl, live, this.httpOptions);
+  public addLive(live: Live): Observable<Live> {
+    return this.http.post<Live>(this.liveUrl, live, this.httpOptions);
   }
 
   public getLiveById(liveId: number): Observable<Live> {
     return this.http.get<Live>(`${this.liveUrl}/${liveId}`);
+  }
+
+  public updateLive(live: Live): Observable<Live> {
+    return this.http.put<Live>(`${this.liveUrl}/${live.id}`, live, this.httpOptions);
   }
 
   public deleteLive(liveId: number): Observable<Live> {
