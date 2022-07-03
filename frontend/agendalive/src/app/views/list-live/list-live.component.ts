@@ -17,6 +17,7 @@ export class ListLiveComponent implements OnInit {
 
   livePrevious: Array<Live> = [];
   liveNext: Array<Live> = [];
+  showSpinnerLoading: boolean = false;
 
   constructor(
     private liveService: LiveService,
@@ -34,16 +35,15 @@ export class ListLiveComponent implements OnInit {
   }
 
   consultarLives() {
+    this.showSpinnerLoading = true;
     this.liveService.consultarLivesPorFlag('previous')
       .subscribe( resposta => {
         this.livePrevious = resposta.content;
         this.livePrevious.forEach(live => {
-          console.log(live.liveLink);
-
           live.liveLink = live.liveLink.replace("watch?v=", "embed/");
-          console.log(live.liveLink);
           live.urlSafe = this.domSanitizer.bypassSecurityTrustResourceUrl(live.liveLink);
         })
+        this.showSpinnerLoading = false;
       });
 
     this.liveService.consultarLivesPorFlag('next')
@@ -53,6 +53,7 @@ export class ListLiveComponent implements OnInit {
           live.liveLink = live.liveLink.replace("watch?v=", "embed/");
           live.urlSafe = this.domSanitizer.bypassSecurityTrustResourceUrl(live.liveLink);
         })
+        this.showSpinnerLoading = false;
       });
   }
 
@@ -60,12 +61,14 @@ export class ListLiveComponent implements OnInit {
     const dialogRef = this.dialog.open(LiveFormDialogComponent, {
       data: {
         liveId,
-        title: 'Editar Live'
+        title: 'Editar Live',
+        showSpinnerLoading: true
       }
     });
   }
 
   deleteLive(liveId: number): void {
+    window.scroll({top: 0, left: 0, behavior: 'smooth'});
     this.liveService.deleteLive(liveId).subscribe(() => {
       this.consultarLives();
     });

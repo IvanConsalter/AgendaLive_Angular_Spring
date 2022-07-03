@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>{{ title }}</h1>
-<form [formGroup]="liveForm">
+<form autocomplete="off" [formGroup]="liveForm">
   <div mat-dialog-content>
     <mat-form-field class="form-field">
       <mat-label>Nome da Live</mat-label>
@@ -46,3 +46,7 @@
     <button mat-raised-button color="warn" (click)="cancelDialog()">Cancelar</button>
   </div>
 </form>
+
+<div class="mat-spinner-content" *ngIf="showSpinnerLoading">
+  <mat-spinner></mat-spinner>
+</div>

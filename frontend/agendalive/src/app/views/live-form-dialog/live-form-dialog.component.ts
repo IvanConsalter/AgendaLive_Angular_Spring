@@ -16,6 +16,7 @@ export class LiveFormDialogComponent implements OnInit {
   liveForm: FormGroup;
   liveId: number;
   title: string;
+  showSpinnerLoading: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<LiveFormDialogComponent>,
@@ -24,6 +25,8 @@ export class LiveFormDialogComponent implements OnInit {
     private liveService: LiveService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    console.log(data);
+    this.showSpinnerLoading = data.showSpinnerLoading;
     this.liveId = data.liveId;
     this.title = data?.title;
   }
@@ -49,7 +52,7 @@ export class LiveFormDialogComponent implements OnInit {
   }
 
   saveLive(): void {
-    if(this.liveId === null) {
+    if(!this.liveId) {
       this.addLive();
     }
     else {
@@ -58,17 +61,21 @@ export class LiveFormDialogComponent implements OnInit {
   }
 
   addLive(): void {
+    this.showSpinnerLoading = true;
     this.liveForm.value.liveDate = this.formatDateToSave();
     this.liveService.addLive(this.liveForm.value).subscribe( () => {
       this.baseConfigWhenSaveLive();
+      this.showSpinnerLoading = false;
     });
   }
 
   updateLive(): void {
+    this.showSpinnerLoading = true;
     this.liveForm.value.liveDate = this.formatDateToSave();
     this.liveForm.value.registrationDate = new Date();
     this.liveService.updateLive(this.liveForm.value).subscribe( () => {
       this.baseConfigWhenSaveLive();
+      this.showSpinnerLoading = false;
     });
 
   }
@@ -86,6 +93,8 @@ export class LiveFormDialogComponent implements OnInit {
         liveTime: [time, [Validators.required]],
         liveLink: [res.liveLink, [Validators.required]]
       });
+
+      this.showSpinnerLoading = false;
     });
   }
 
